@@ -1,0 +1,9 @@
+/home/ubuntu/workspace/bin/Debug/netcoreapp2.0/workspace.deps.json
+/home/ubuntu/workspace/bin/Debug/netcoreapp2.0/workspace.runtimeconfig.json
+/home/ubuntu/workspace/bin/Debug/netcoreapp2.0/workspace.runtimeconfig.dev.json
+/home/ubuntu/workspace/bin/Debug/netcoreapp2.0/workspace.dll
+/home/ubuntu/workspace/bin/Debug/netcoreapp2.0/workspace.pdb
+/home/ubuntu/workspace/obj/Debug/netcoreapp2.0/workspace.csproj.CoreCompileInputs.cache
+/home/ubuntu/workspace/obj/Debug/netcoreapp2.0/workspace.AssemblyInfo.cs
+/home/ubuntu/workspace/obj/Debug/netcoreapp2.0/workspace.dll
+/home/ubuntu/workspace/obj/Debug/netcoreapp2.0/workspace.pdb
