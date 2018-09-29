@@ -1,2 +1,2 @@
-bin
-data/family.json
+/bin/*
+/data/family.json

@@ -24,14 +24,28 @@ namespace SecretSanta.Models
         ///<summary>
         ///Assignes everyone people for secret santa. 
         ///<param ref="numberOfPlayers">The number of people to assign
-        ///should be less than the number of people in the group</param>
+        ///should be less than the number of people in the group
+        ///minus the largest number of family members</param>
         ///</summary>
         public bool Shuffle(int numberOfPlayers = 1)
         {
             if(numberOfPlayers >= this.Count){
                 return false;
             }
-            
+            for(var i = 0; i < numberOfPlayers; i++){
+                List<Person> playerList = this.ToList();
+                foreach(Person person in this){
+                    List<Person> possibleAssignments = playerList
+                        .Where(p => p != person 
+                            && !person.Family.Contains(p) 
+                            && !person.AssignedList.Contains(p))
+                    if (!possibleAssignments.Any())
+                    {
+                        return false;
+                    }
+                    Person assigned = possibleAssignments.
+                }
+            }
             return true;
         }
         

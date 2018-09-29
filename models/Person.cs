@@ -15,6 +15,11 @@ namespace SecretSanta.Models
         ///being paired with the person
         ///</summary>
         public List<Person> Family {get; set;} 
+        ///<summary>
+        ///The collection of people that have been
+        ///paired with the person
+        ///</summary>
+        public List<Person> AssignedList {get; set;}
     }
     
 }
