@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using SecretSanta.Extensions;
 
 namespace SecretSanta.Models
 {
@@ -33,17 +35,19 @@ namespace SecretSanta.Models
                 return false;
             }
             for(var i = 0; i < numberOfPlayers; i++){
-                List<Person> playerList = this.ToList();
+                List<Person> playerList = this;
                 foreach(Person person in this){
                     List<Person> possibleAssignments = playerList
-                        .Where(p => p != person 
-                            && !person.Family.Contains(p) 
-                            && !person.AssignedList.Contains(p))
+                        .Where(p => p != person
+                            && !person.Family.Contains(p)
+                            && !person.AssignedList.Contains(p)).ToList();
                     if (!possibleAssignments.Any())
                     {
                         return false;
                     }
-                    Person assigned = possibleAssignments.
+                    Person assigned = possibleAssignments.PickRandom();
+                    possibleAssignments.Remove(assigned);
+                    person.AssignedList.Add(assigned);
                 }
             }
             return true;
