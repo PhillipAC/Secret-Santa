@@ -5,12 +5,13 @@ namespace SecretSanta
 {
     class Program
     {
-        public const string _familyPath = "/data/family.json";
+        public const string _familyPath = "../../data/family.json";
         public const int _secretAmount = 2;
         
         static void Main(string[] args)
         {
             Gathering gathering = new Gathering(_familyPath);
+            gathering.ReadJson();
             bool success = false;
             if(!gathering.Validate())
             {
@@ -18,17 +19,13 @@ namespace SecretSanta
             }
             else
             {
-                success = gathering.Shuffle(_secretAmount);
-                if(success)
+                while (success == false)
                 {
-                    gathering.CreateCsv();
-                    Console.WriteLine("Secret Santa list was successfully created");
+                    success = gathering.Shuffle(_secretAmount);
                 }
-                else
-                {
-                    Console.WriteLine("The amount specified are higher or equal to the number of players.");
-                }
+                Console.WriteLine("Secret Santa list was successfully created");
             }
+            gathering.CreateCsv("C:/Users/Public/Documents");
             Console.WriteLine("Press any button to close.");
             Console.ReadKey();
         }
