@@ -12,19 +12,14 @@ namespace SecretSanta.Models
     public class Gathering : List<Person>
     {
         private string _infoPath;
+        private int _numberOfPlayers;
+        private const char _male = 'M';
+        private const char _female = 'F';
         
-        public Gathering(string infoPath){
+        public Gathering(string infoPath, int secretAmount){
             _infoPath = infoPath;
+            _numberOfPlayers = secretAmount;
         }
-        ///<summary>
-        ///Validates if the supplied gather is valid
-        ///all family members of a user should be members
-        ///of the gather.
-        ///</summary>
-        public bool Validate()
-        {
-            return true;  
-        } 
         
         ///<summary>
         ///Assignes everyone people for secret santa. 
@@ -32,36 +27,33 @@ namespace SecretSanta.Models
         ///should be less than the number of people in the group
         ///minus the largest number of family members</param>
         ///</summary>
-        public bool Shuffle(int numberOfPlayers = 1)
+        public bool Shuffle()
         {
-            if(numberOfPlayers >= this.Count){
+            if(_numberOfPlayers >= this.Count){
                 return false;
             }
-            for(var i = 0; i < numberOfPlayers; i++){
-                List<Person> notAssigned = new List<Person>(this);
-                foreach(Person person in this){
-                    //Person should not be included with their own list
-                    //Person should not be part of that family
-                    //Person should not already be assigned to that person
-                    //Person should not already be assigned to someone that round
-                    List<Person> possibleAssignments = this
-                        .Where(p => p != person
-                            && !person.Family.Contains(p.Name)
-                            && !person.AssignedList.Contains(p)
-                            && notAssigned.Contains(p)
-                        ).ToList();
-                    if (!possibleAssignments.Any())
+            IEnumerable<Person> males = this.Where(x => x.Gender.Equals(_male));
+            IEnumerable<Person> females = this.Where(x => x.Gender.Equals(_female));
+
+            males.Shuffle();
+            females.Shuffle();
+
+            foreach(Person person in this)
+            {
+                List<Person> currentList = person.Gender.Equals(_male) ? males.ToList() : females.ToList();
+                int index = currentList.FindIndex(x => x.Equals(person));
+                for(var i = 0; i < _numberOfPlayers; i++)
+                {
+                    int assignedIndex = index + i + 1;
+                    if(assignedIndex >= currentList.Count())
                     {
-                        Console.WriteLine("Not enough possible assignments: ");
-                        Console.WriteLine(person.Name);
-                        return false;
+                        assignedIndex -= currentList.Count();
                     }
-                    Person assigned = possibleAssignments.PickRandom();
-                    possibleAssignments.Remove(assigned);
-                    notAssigned.Remove(assigned);
-                    person.AssignedList.Add(assigned);
+
+                    person.AssignedList.Add(currentList[assignedIndex]);
                 }
             }
+
             return true;
         }
         
@@ -72,7 +64,12 @@ namespace SecretSanta.Models
         public void CreateCsv(string filePath)
         {
             StringBuilder csv = new StringBuilder();
-            csv.AppendLine("Person, Giftee1, Giftee2");
+            string header = "Person";
+            for (var i = 0; i < _numberOfPlayers; i++)
+            {
+                header += $", Giftee{i + 1}";
+            }
+            csv.AppendLine(header);
             foreach(Person person in this)
             {
                 string line = $"{person.Name}";
@@ -82,7 +79,18 @@ namespace SecretSanta.Models
                 }
                 csv.AppendLine(line);
             }
-            File.WriteAllText(filePath, csv.ToString());
+            try
+            {
+                File.WriteAllText(filePath, csv.ToString());
+            }
+            catch
+            {
+                Console.WriteLine("There was an issue writing tot he csv file.");
+            }
+            finally
+            {
+                Console.Write(csv.ToString());
+            }
         }
 
         /// <summary>

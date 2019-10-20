@@ -11,10 +11,9 @@ namespace SecretSanta.Models
         ///</summary>
         public string Name {get; set;}
         ///<summary>
-        ///The collection of people excluded from
-        ///being paired with the person
+        ///If the person is male or female
         ///</summary>
-        public List<string> Family {get; set;} 
+        public char Gender { get; set; }
         ///<summary>
         ///The collection of people that have been
         ///paired with the person

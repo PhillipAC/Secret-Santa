@@ -6,26 +6,24 @@ namespace SecretSanta
     class Program
     {
         public const string _familyPath = "../../data/family.json";
-        public const int _secretAmount = 2;
+        public const int _secretAmount = 3;
         
         static void Main(string[] args)
         {
-            Gathering gathering = new Gathering(_familyPath);
+            Gathering gathering = new Gathering(_familyPath, _secretAmount);
             gathering.ReadJson();
-            bool success = false;
-            if(!gathering.Validate())
+            bool success = gathering.Shuffle();
+            if (success)
             {
-                Console.WriteLine("Make sure every family member is included in the Secret Santa.");
+
+                Console.WriteLine("Secret Santa list was successfully created");
+                gathering.CreateCsv("C:/Users/Public/Documents/SecretSantaExport.csv");
             }
             else
             {
-                while (success == false)
-                {
-                    success = gathering.Shuffle(_secretAmount);
-                }
-                Console.WriteLine("Secret Santa list was successfully created");
+                Console.WriteLine("There was an issue creating the list.");
             }
-            gathering.CreateCsv("C:/Users/Public/Documents");
+            
             Console.WriteLine("Press any button to close.");
             Console.ReadKey();
         }

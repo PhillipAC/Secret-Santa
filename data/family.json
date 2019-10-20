@@ -1,89 +1,51 @@
 [
 	{
 		"Name": "Phillip",
-		"Family": [
-			"Christina"
-		]
+		"Gender": "M"
 	},
 	{
 		"Name": "Christina",
-		"Family": [
-			"Phillip"
-		]
+		"Gender": "F"
 	},
 	{
 		"Name": "Steven",
-		"Family": [
-			"Jessica"
-		]
+		"Gender": "M"
 	},
 	{
 		"Name": "Jessica",
-		"Family": [
-			"Steven"
-		]
+		"Gender": "F"
 	},
 	{
 		"Name": "Laura",
-		"Family": [
-			"Trent"
-		]
+		"Gender": "F"
 	},
 	{
 		"Name": "Trent",
-		"Family": [
-			"Laura"
-		]
+		"Gender": "M"
 	},
 	{
 		"Name": "Sherill",
-		"Family": [
-			"Craig",
-			"Phillip",
-			"Christina",
-			"Laura",
-			"Trent",
-			"Jessica",
-			"Steven"
-		]
+		"Gender": "F"
 	},
 	{
 		"Name": "Craig",
-		"Family": [
-			"Sherill",
-			"Phillip",
-			"Christina",
-			"Laura",
-			"Trent",
-			"Jessica",
-			"Steven"
-		]
+		"Gender": "M"
 	},
 	{
 		"Name": "Josh",
-		"Family": [
-		]
+		"Gender": "M"
 	},
 	{
 		"Name": "Matt",
-		"Family": [
-		]
+		"Gender": "M"
 	},
 	{
 		"Name": "Kathy",
-		"Family": [
-			"Dave",
-			"Josh",
-			"Matt"
-		]
+		"Gender": "F"
 	},
 	{
 		"Name": "Dave",
-		"Family": [
-			"Kathy",
-			"Josh",
-			"Matt"
-		]
+		"Gender": "M"
 	}
 
 ]
