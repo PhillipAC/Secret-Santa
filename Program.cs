@@ -25,7 +25,7 @@ namespace SecretSanta
                 }
                 Console.WriteLine("Secret Santa list was successfully created");
             }
-            gathering.CreateCsv("C:/Users/Public/Documents");
+            gathering.CreateCsv("C:/Users/Public/Documents/SecretSantaExport.csv");
             Console.WriteLine("Press any button to close.");
             Console.ReadKey();
         }
